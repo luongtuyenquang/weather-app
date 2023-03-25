@@ -1,5 +1,5 @@
 <template>
-  <section class="mb-9">
+  <section class="mb-[50px]">
     <p class="uppercase">Dự báo theo giờ</p>
     <hr class="my-2" />
     <div class="flex justify-between">
