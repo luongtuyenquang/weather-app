@@ -14,6 +14,8 @@
         :humidity="weatherInfo.current?.humidity"
         :wind="weatherInfo.current?.wind_mph"
         :feelsLike="weatherInfo.current?.feelslike_c"
+        :forecastData="weatherInfo.forecast?.forecastday"
+        :localtime="weatherInfo.location?.localtime"
       />
       <Forecast :forecastData="weatherInfo.forecast?.forecastday" :localtime="weatherInfo.location?.localtime" />
     </div>
@@ -47,7 +49,7 @@ export default {
   },
   async mounted() {
     const res = await axios.get(this.urlWeatherData("saigon"));
-    // console.log(res.data);
+    console.log(res.data);
     this.weatherInfo = res.data;
   },
 };
