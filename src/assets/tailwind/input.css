@@ -9,3 +9,17 @@
     font-family: Roboto, sans-serif;
   }
 }
+
+@layer utilities {
+  .horizontal-scrollbar::-webkit-scrollbar {
+    @apply h-[11px];
+  }
+
+  .horizontal-scrollbar::-webkit-scrollbar-track {
+    @apply rounded-full bg-[#f7f4ed];
+  }
+
+  .horizontal-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-[#aaa] rounded-full border-2 border-solid border-[#f6f7ed];
+  }
+}

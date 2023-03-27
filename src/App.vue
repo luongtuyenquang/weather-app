@@ -13,8 +13,9 @@
         :temp="weatherInfo.current?.temp_c"
         :humidity="weatherInfo.current?.humidity"
         :wind="weatherInfo.current?.wind_mph"
+        :feelsLike="weatherInfo.current?.feelslike_c"
       />
-      <Forecast />
+      <Forecast :forecastData="weatherInfo.forecast?.forecastday" :localtime="weatherInfo.location?.localtime" />
     </div>
   </div>
 </template>
@@ -28,13 +29,13 @@ import SearchBar from "./components/SearchBar.vue";
 import TemperatureDetail from "./components/TemperatureDetail.vue";
 import LocalTime from "./components/LocalTime.vue";
 
-import { urlAPI } from "./global/constants";
+import { urlForecastAPI } from "./global/constants";
 
 export default {
   data() {
     return {
       weatherInfo: [],
-      urlWeatherData: urlAPI,
+      urlWeatherData: urlForecastAPI,
     };
   },
   components: {
@@ -45,7 +46,8 @@ export default {
     LocalTime,
   },
   async mounted() {
-    const res = await axios.get(this.urlWeatherData("vietnam"));
+    const res = await axios.get(this.urlWeatherData("saigon"));
+    // console.log(res.data);
     this.weatherInfo = res.data;
   },
 };
