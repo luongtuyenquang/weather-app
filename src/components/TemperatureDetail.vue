@@ -9,14 +9,14 @@
         <p class="opacity-90">Gió: {{ Math.round(wind) }} km/h</p>
       </div>
     </div>
-    <div class="flex justify-between mb-9">
-      <p>Bình minh: {{ currentDayData?.astro.sunrise }}</p>
+    <div class="flex justify-between mb-9 opacity-[0.85]">
+      <p>Bình minh: {{ currentDayData.astro.sunrise }}</p>
       <p class="opacity-70">|</p>
-      <p>Hoàng hôn: {{ currentDayData?.astro.sunset }}</p>
+      <p>Hoàng hôn: {{ currentDayData.astro.sunset }}</p>
       <p class="opacity-70">|</p>
-      <p>Trăng lên: {{ currentDayData?.astro.moonrise }}</p>
+      <p>Trăng lên: {{ currentDayData.astro.moonrise }}</p>
       <p class="opacity-70">|</p>
-      <p>Trăng tàn: {{ currentDayData?.astro.moonset }}</p>
+      <p>Trăng tàn: {{ currentDayData.astro.moonset }}</p>
     </div>
   </section>
 </template>
@@ -34,9 +34,9 @@ export default {
   },
   computed: {
     currentDayData() {
-      const formatDate = this.localtime?.split(" ").at(0);
+      const formatDate = this.localtime.split(" ").at(0);
 
-      const result = this.forecastData?.find((item) => {
+      const result = this.forecastData.find((item) => {
         if (item.date === formatDate) {
           return item;
         }

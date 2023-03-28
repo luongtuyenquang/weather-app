@@ -1,15 +1,30 @@
 <template>
   <header>
     <ul class="flex justify-center gap-7 text-lg">
-      <li class="cursor-pointer">Lodon</li>
-      <li class="cursor-pointer">Tokyo</li>
-      <li class="cursor-pointer">Paris</li>
-      <li class="cursor-pointer">Vietnam</li>
-      <li class="cursor-pointer">China</li>
+      <li
+        v-for="navItem in NAV_DATA"
+        :key="navItem.slug"
+        :class="[isActive(navItem.slug) ? 'header-active' : 'header-hover']"
+      >
+        <router-link :to="{ name: 'nav-router', params: { location: navItem.slug } }">{{ navItem.name }}</router-link>
+      </li>
     </ul>
   </header>
 </template>
 
 <script>
-export default {};
+import { NAV_DATA } from "../global/constants";
+
+export default {
+  data() {
+    return {
+      NAV_DATA,
+    };
+  },
+  methods: {
+    isActive(nav) {
+      return this.$route.params.location === nav;
+    },
+  },
+};
 </script>

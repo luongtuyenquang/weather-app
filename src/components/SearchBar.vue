@@ -1,5 +1,5 @@
 <template>
-  <section class="flex justify-center mt-6">
+  <section class="flex justify-center my-[30px]">
     <label for="search" class="relative">
       <div class="absolute inset-y-0 left-0 flex items-center pl-2.5"><i class="fas fa-search text-slate-500"></i></div>
       <input

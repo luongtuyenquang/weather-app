@@ -3,7 +3,7 @@
     <p class="uppercase">Dự báo 24 giờ</p>
     <hr class="mt-1 mb-2" />
     <div class="flex justify-between mt-[15px] overflow-x-auto gap-x-[25px] pb-[15px] horizontal-scrollbar">
-      <div class="flex flex-col items-center shrink-0" v-for="(hourly, index) in currentDayData?.hour" :key="index">
+      <div class="flex flex-col items-center shrink-0" v-for="(hourly, index) in currentDayData.hour" :key="index">
         <p>{{ formatDailyTime(hourly.time) }}</p>
         <img :src="hourly.condition.icon" class="my-2.5" alt="image" />
         <p>{{ Math.round(hourly.temp_c) }}°</p>
@@ -16,7 +16,7 @@
     <div class="flex gap-x-[30px] mt-[15px]">
       <div
         class="flex flex-col items-center w-[calc(100%/5)]"
-        v-for="(daily, index) in forecastData?.slice(1, 6)"
+        v-for="(daily, index) in forecastData.slice(1, 6)"
         :key="index"
       >
         <p>{{ formatDay(daily) }}</p>
@@ -45,9 +45,9 @@ export default {
   },
   computed: {
     currentDayData() {
-      const formatDate = this.localtime?.split(" ").at(0);
+      const formatDate = this.localtime.split(" ").at(0);
 
-      const result = this.forecastData?.find((item) => {
+      const result = this.forecastData.find((item) => {
         if (item.date === formatDate) {
           return item;
         }

@@ -1,14 +1,20 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
+import Home from "../../src/App.vue";
+import { NAV_DATA } from "../global/constants";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'home',
-    //   // component: HomeView
-    // },
-  ]
-})
+    {
+      path: "/:location",
+      name: "nav-router",
+      component: Home,
+    },
+    {
+      path: "/",
+      redirect: `/${NAV_DATA[0].slug}`,
+    },
+  ],
+});
 
-export default router
+export default router;

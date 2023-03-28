@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center opacity-80 mt-[30px]">{{ formatLocalTime }}</div>
+  <div class="text-center opacity-80">{{ formatLocalTime }}</div>
 </template>
 
 <script>
@@ -11,9 +11,9 @@ export default {
   },
   computed: {
     formatLocalTime() {
-      const splitCurrentTime = this.localtime?.split(" ");
-      const currentDate = splitCurrentTime?.at(0);
-      const currentTime = splitCurrentTime?.at(-1);
+      const splitCurrentTime = this.localtime.split(" ");
+      const currentDate = splitCurrentTime.at(0);
+      const currentTime = splitCurrentTime.at(-1);
       const formatTime = dayjs(`1/1/1 ${currentTime}`).format("HH:mm A");
       const formatDate = dayjs(currentDate).format("dddd, Ngày DD - MM - YYYY");
       return `${formatDate} | Giờ hiện tại: ${formatTime}`;
