@@ -6,11 +6,26 @@
         type="text"
         placeholder="Nhập nơi cần tìm..."
         class="w-80 h-9 rounded-md border border-slate-300 text-slate-500 px-3 pr-2 pl-9 placeholder:text-slate-400 placeholder:text-sm focus:outline-none focus:shadow-lg"
+        v-model="searchValue"
+        @keyup.enter="handleUpdateValue"
       />
     </label>
   </section>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      searchValue: "",
+    };
+  },
+  methods: {
+    handleUpdateValue() {
+      this.$emit("onUpdateSearchValue", this.searchValue);
+      this.$router.push(this.searchValue.toLowerCase());
+      if (this.searchValue === "") this.$router.push("/");
+    },
+  },
+};
 </script>

@@ -2,7 +2,7 @@
   <div class="w-full h-screen overflow-y-auto bg-gradient-to-br from-light-green-2 to-light-green-1 text-white">
     <div class="max-w-screen-md m-auto py-[40px]" v-if="weatherInfo">
       <Header />
-      <SearchBar />
+      <SearchBar @onUpdateSearchValue="handleUpdateSearchValue" />
       <LocalTime :localtime="weatherInfo.location.localtime" />
       <div class="flex items-center justify-between mt-[30px]">
         <p class="text-3xl">{{ weatherInfo.location.name }}</p>
@@ -37,6 +37,7 @@ export default {
   data() {
     return {
       weatherInfo: null,
+      searchValue: "",
     };
   },
   components: {
@@ -48,23 +49,35 @@ export default {
   },
   created() {
     this.$watch(
-      () => this.$route.params,
+      () => this.handleQueryLocation,
       () => {
         this.fetchData();
       },
       { immediate: true }
     );
   },
+  computed: {
+    handleQueryLocation() {
+      if (this.searchValue) {
+        return this.searchValue;
+      } else {
+        return this.$route.params.location;
+      }
+    },
+  },
   methods: {
     async fetchData() {
       const res = await axios.get(URL_BASE_API, {
         params: {
           key: URL_KEY,
-          q: this.$route.params.location,
+          q: this.handleQueryLocation,
           days: 7,
         },
       });
       this.weatherInfo = res.data;
+    },
+    handleUpdateSearchValue(value) {
+      this.searchValue = value;
     },
   },
 };
