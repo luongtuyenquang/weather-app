@@ -1,6 +1,12 @@
 <template>
-  <div class="w-full h-screen overflow-y-auto bg-gradient-to-br from-light-green-2 to-light-green-1 text-white">
-    <div class="max-w-screen-md m-auto py-[40px]" v-if="weatherInfo">
+  <div
+    class="w-full h-screen overflow-y-auto bg-no-repeat bg-cover text-white p-8"
+    :style="`background-image: url('${handleChangeBackgroundImage}')`"
+  >
+    <div
+      class="max-w-screen-md m-auto px-[30px] py-[40px] rounded-lg bg-[#1e293b9e] shadow-light-black"
+      v-if="weatherInfo"
+    >
       <Header />
       <SearchBar @onUpdateSearchValue="handleUpdateSearchValue" />
       <LocalTime :localtime="weatherInfo.location.localtime" />
@@ -31,7 +37,7 @@ import SearchBar from "./components/SearchBar.vue";
 import TemperatureDetail from "./components/TemperatureDetail.vue";
 import LocalTime from "./components/LocalTime.vue";
 
-import { URL_KEY, URL_BASE_API } from "./global/constants";
+import { URL_KEY, URL_BASE_API, BACKGROUND_IMAGE_DATA, BACKGROUND_IMAGE_DEFAULT } from "./global/constants";
 
 export default {
   data() {
@@ -62,6 +68,16 @@ export default {
         return this.searchValue;
       } else {
         return this.$route.params.location;
+      }
+    },
+    handleChangeBackgroundImage() {
+      const statusWeatherData = this.weatherInfo.current.condition.text.toLowerCase();
+      const keys = Object.keys(BACKGROUND_IMAGE_DATA);
+      const status = keys.find((key) => statusWeatherData.includes(key));
+      if (status) {
+        return BACKGROUND_IMAGE_DATA[status];
+      } else {
+        return BACKGROUND_IMAGE_DEFAULT;
       }
     },
   },

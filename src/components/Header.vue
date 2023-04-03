@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="mb-[40px]">
     <ul class="flex justify-center gap-7 text-lg">
       <li
         v-for="navItem in NAV_DATA"

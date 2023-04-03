@@ -8,8 +8,8 @@ export const NAV_DATA = [
     slug: "hanoi",
   },
   {
-    name: "London",
-    slug: "london",
+    name: "Sài Gòn",
+    slug: "saigon",
   },
   {
     name: "Tokyo",
@@ -24,3 +24,20 @@ export const NAV_DATA = [
     slug: "seoul",
   },
 ];
+
+export const BACKGROUND_IMAGE_DEFAULT = "src/assets/images/default.png";
+
+export const BACKGROUND_IMAGE_DATA = {
+  cloud: "src/assets/images/cloud.png",
+  mist: "src/assets/images/mist.png",
+  fog: "src/assets/images/mist.png",
+  sun: "src/assets/images/sun.png",
+  drizzle: "src/assets/images/rain.png",
+  rain: "src/assets/images/rain.png",
+  overcast: "src/assets/images/overcast.png",
+  snow: "src/assets/images/snow.png",
+  sleet: "src/assets/images/snow.png",
+  ice: "src/assets/images/snow.png",
+  blizzard: "src/assets/images/snow.png",
+  thunder: "src/assets/images/thunder.png",
+};
