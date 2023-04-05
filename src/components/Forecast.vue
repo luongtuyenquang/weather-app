@@ -2,7 +2,9 @@
   <section class="mb-[50px]">
     <p class="uppercase">Dự báo 24 giờ</p>
     <hr class="mt-1 mb-2" />
-    <div class="flex justify-between mt-[15px] overflow-x-auto gap-x-[30px] pb-[15px] horizontal-scrollbar">
+    <div
+      class="flex justify-between mt-[15px] overflow-x-auto gap-x-[30px] max-767:gap-x-5 pb-[15px] horizontal-scrollbar"
+    >
       <div class="flex flex-col items-center shrink-0" v-for="(hourly, index) in currentDayData().hour" :key="index">
         <p>{{ formatDailyTime(hourly.time) }}</p>
         <img :src="hourly.condition.icon" class="my-2.5" alt="image" />
@@ -13,7 +15,7 @@
   <section>
     <p class="uppercase">Dự báo 5 ngày</p>
     <hr class="mt-1 mb-2" />
-    <div class="flex gap-x-[30px] mt-[15px]">
+    <div class="flex gap-x-[30px] max-767:gap-x-4 mt-[15px]">
       <div
         class="flex flex-col items-center w-[calc(100%/5)]"
         v-for="(daily, index) in forecastData.slice(1, 6)"

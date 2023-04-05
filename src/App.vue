@@ -1,9 +1,9 @@
 <template>
   <div
-    class="w-full h-screen overflow-y-auto bg-no-repeat bg-cover text-white p-8"
+    class="flex w-full h-screen overflow-y-auto bg-no-repeat bg-cover text-white p-8 max-350:text-sm max-767:p-3"
     :style="`background-image: url('${handleChangeBackgroundImage()}')`"
   >
-    <div class="max-w-screen-md m-auto px-[30px] py-[40px] rounded-lg bg-[#1e293b9e] shadow-light-black">
+    <div class="w-full max-w-3xl m-auto px-[30px] py-[40px] rounded-lg bg-[#1e293b9e] shadow-light-black max-767:px-5">
       <Header />
       <SearchBar @onUpdateSearchValue="handleUpdateSearchValue" />
       <LocalTime :localtime="weatherData.location.localtime" />

@@ -12,7 +12,7 @@
 
 @layer utilities {
   .horizontal-scrollbar::-webkit-scrollbar {
-    @apply h-[11px];
+    @apply h-[11px] max-767:h-[9px];
   }
 
   .horizontal-scrollbar::-webkit-scrollbar-track {

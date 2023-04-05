@@ -9,13 +9,13 @@
         <p class="opacity-90">Gió: {{ Math.round(wind) }} km/h</p>
       </div>
     </div>
-    <div class="flex justify-between mb-9 opacity-[0.85]">
+    <div class="flex justify-between mb-9 opacity-[0.85] max-767:flex-col max-767:gap-y-2 max-767:items-center">
       <p>Bình minh: {{ currentDayData().astro.sunrise }}</p>
-      <p class="opacity-70">|</p>
+      <span class="opacity-70 max-767:hidden">|</span>
       <p>Hoàng hôn: {{ currentDayData().astro.sunset }}</p>
-      <p class="opacity-70">|</p>
+      <span class="opacity-70 max-767:hidden">|</span>
       <p>Trăng lên: {{ currentDayData().astro.moonrise }}</p>
-      <p class="opacity-70">|</p>
+      <span class="opacity-70 max-767:hidden">|</span>
       <p>Trăng tàn: {{ currentDayData().astro.moonset }}</p>
     </div>
   </section>
