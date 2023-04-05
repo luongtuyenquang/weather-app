@@ -10,40 +10,37 @@
       </div>
     </div>
     <div class="flex justify-between mb-9 opacity-[0.85]">
-      <p>Bình minh: {{ currentDayData.astro.sunrise }}</p>
+      <p>Bình minh: {{ currentDayData().astro.sunrise }}</p>
       <p class="opacity-70">|</p>
-      <p>Hoàng hôn: {{ currentDayData.astro.sunset }}</p>
+      <p>Hoàng hôn: {{ currentDayData().astro.sunset }}</p>
       <p class="opacity-70">|</p>
-      <p>Trăng lên: {{ currentDayData.astro.moonrise }}</p>
+      <p>Trăng lên: {{ currentDayData().astro.moonrise }}</p>
       <p class="opacity-70">|</p>
-      <p>Trăng tàn: {{ currentDayData.astro.moonset }}</p>
+      <p>Trăng tàn: {{ currentDayData().astro.moonset }}</p>
     </div>
   </section>
 </template>
 
-<script>
-export default {
-  props: {
-    icon: String,
-    temp: Number,
-    humidity: Number,
-    wind: Number,
-    feelsLike: Number,
-    forecastData: Array,
-    localtime: String,
-  },
-  computed: {
-    currentDayData() {
-      const formatDate = this.localtime.split(" ").at(0);
+<script setup>
+const props = defineProps({
+  icon: String,
+  temp: Number,
+  humidity: Number,
+  wind: Number,
+  feelsLike: Number,
+  forecastData: Array,
+  localtime: String,
+});
 
-      const result = this.forecastData.find((item) => {
-        if (item.date === formatDate) {
-          return item;
-        }
-      });
+const currentDayData = () => {
+  const formatDate = props.localtime.split(" ").at(0);
 
-      return result;
-    },
-  },
+  const result = props.forecastData.find((item) => {
+    if (item.date === formatDate) {
+      return item;
+    }
+  });
+
+  return result;
 };
 </script>

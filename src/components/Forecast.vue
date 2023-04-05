@@ -3,7 +3,7 @@
     <p class="uppercase">Dự báo 24 giờ</p>
     <hr class="mt-1 mb-2" />
     <div class="flex justify-between mt-[15px] overflow-x-auto gap-x-[30px] pb-[15px] horizontal-scrollbar">
-      <div class="flex flex-col items-center shrink-0" v-for="(hourly, index) in currentDayData.hour" :key="index">
+      <div class="flex flex-col items-center shrink-0" v-for="(hourly, index) in currentDayData().hour" :key="index">
         <p>{{ formatDailyTime(hourly.time) }}</p>
         <img :src="hourly.condition.icon" class="my-2.5" alt="image" />
         <p>{{ Math.round(hourly.temp_c) }}°</p>
@@ -27,34 +27,28 @@
   </section>
 </template>
 
-<script>
+<script setup>
 import dayjs from "dayjs";
 
-export default {
-  props: {
-    forecastData: Array,
-    localtime: String,
-  },
-  methods: {
-    formatDay(daily) {
-      return dayjs(daily.date).format("DD-MM");
-    },
-    formatDailyTime(time) {
-      return time.split(" ").at(-1);
-    },
-  },
-  computed: {
-    currentDayData() {
-      const formatDate = this.localtime.split(" ").at(0);
+const props = defineProps({ forecastData: Array, localtime: String });
 
-      const result = this.forecastData.find((item) => {
-        if (item.date === formatDate) {
-          return item;
-        }
-      });
+const formatDay = (daily) => {
+  return dayjs(daily.date).format("DD-MM");
+};
 
-      return result;
-    },
-  },
+const formatDailyTime = (time) => {
+  return time.split(" ").at(-1);
+};
+
+const currentDayData = () => {
+  const formatDate = props.localtime.split(" ").at(0);
+
+  const result = props.forecastData.find((item) => {
+    if (item.date === formatDate) {
+      return item;
+    }
+  });
+
+  return result;
 };
 </script>

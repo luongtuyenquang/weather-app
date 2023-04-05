@@ -13,19 +13,18 @@
   </section>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      searchValue: "",
-    };
-  },
-  methods: {
-    handleUpdateValue() {
-      this.$emit("onUpdateSearchValue", this.searchValue);
-      this.$router.push(this.searchValue.toLowerCase());
-      if (this.searchValue === "") this.$router.push("/");
-    },
-  },
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const emit = defineEmits(["onUpdateSearchValue"]);
+
+const router = useRouter();
+const searchValue = ref("");
+
+const handleUpdateValue = () => {
+  emit("onUpdateSearchValue", searchValue.value);
+  router.push(searchValue.value.toLowerCase());
+  if (searchValue.value === "") router.push("/");
 };
 </script>
