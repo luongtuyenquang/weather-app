@@ -25,19 +25,19 @@ export const NAV_DATA = [
   },
 ];
 
-export const BACKGROUND_IMAGE_DEFAULT = "src/assets/images/default.png";
+export const BACKGROUND_IMAGE_DEFAULT = "./images/default.png";
 
 export const BACKGROUND_IMAGE_DATA = {
-  cloud: "src/assets/images/cloud.png",
-  mist: "src/assets/images/mist.png",
-  fog: "src/assets/images/mist.png",
-  sun: "src/assets/images/sun.png",
-  drizzle: "src/assets/images/rain.png",
-  rain: "src/assets/images/rain.png",
-  overcast: "src/assets/images/overcast.png",
-  snow: "src/assets/images/snow.png",
-  sleet: "src/assets/images/snow.png",
-  ice: "src/assets/images/snow.png",
-  blizzard: "src/assets/images/snow.png",
-  thunder: "src/assets/images/thunder.png",
+  cloud: "./images/cloud.png",
+  mist: "./images/mist.png",
+  fog: "./images/mist.png",
+  sun: "./images/sun.png",
+  drizzle: "./images/rain.png",
+  rain: "./images/rain.png",
+  overcast: "./images/overcast.png",
+  snow: "./images/snow.png",
+  sleet: "./images/snow.png",
+  ice: "./images/snow.png",
+  blizzard: "./images/snow.png",
+  thunder: "./images/thunder.png",
 };
