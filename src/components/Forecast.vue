@@ -13,7 +13,7 @@
     </div>
   </section>
   <section>
-    <p class="uppercase">Dự báo 5 ngày</p>
+    <p class="uppercase">Dự báo {{ countNextDays() }} ngày</p>
     <hr class="mt-1 mb-2" />
     <div class="flex gap-x-[30px] max-767:gap-x-4 mt-[15px]">
       <div
@@ -40,6 +40,14 @@ const formatDay = (daily) => {
 
 const formatDailyTime = (time) => {
   return time.split(" ").at(-1);
+};
+
+const countNextDays = () => {
+  if (props.forecastData.length >= 6) {
+    return 5;
+  } else {
+    return props.forecastData.length - 1;
+  }
 };
 
 const currentDayData = () => {
