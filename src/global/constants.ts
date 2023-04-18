@@ -4,12 +4,12 @@ export const URL_BASE_API = "https://api.weatherapi.com/v1/forecast.json";
 
 export const NAV_DATA = [
   {
-    name: "Hà nội",
-    slug: "hanoi",
-  },
-  {
     name: "Sài Gòn",
     slug: "saigon",
+  },
+  {
+    name: "Hà nội",
+    slug: "hanoi",
   },
   {
     name: "Tokyo",
@@ -27,7 +27,7 @@ export const NAV_DATA = [
 
 export const BACKGROUND_IMAGE_DEFAULT = "./images/default.png";
 
-export const BACKGROUND_IMAGE_DATA = {
+export const BACKGROUND_IMAGE_DATA: { [key: string]: string } = {
   cloud: "./images/cloud.png",
   mist: "./images/mist.png",
   fog: "./images/mist.png",

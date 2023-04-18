@@ -5,7 +5,11 @@
     <div
       class="flex justify-between mt-[15px] overflow-x-auto gap-x-[30px] max-767:gap-x-5 pb-[15px] horizontal-scrollbar"
     >
-      <div class="flex flex-col items-center shrink-0" v-for="(hourly, index) in currentDayData().hour" :key="index">
+      <div
+        class="flex flex-col items-center shrink-0"
+        v-for="(hourly, index) in getCurrentDay(localtime, forecastData)?.hour"
+        :key="index"
+      >
         <p>{{ formatDailyTime(hourly.time) }}</p>
         <img :src="hourly.condition.icon" class="my-2.5" alt="image" />
         <p>{{ Math.round(hourly.temp_c) }}°</p>
@@ -29,16 +33,18 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import dayjs from "dayjs";
+import getCurrentDay from "@/utils/getCurrentDay";
+import type { ForecastDay } from "@/interfaces/Weather";
 
-const props = defineProps({ forecastData: Array, localtime: String });
+const props = defineProps<{ forecastData: ForecastDay[]; localtime: string }>();
 
-const formatDay = (daily) => {
+const formatDay = (daily: ForecastDay) => {
   return dayjs(daily.date).format("DD-MM");
 };
 
-const formatDailyTime = (time) => {
+const formatDailyTime = (time: string) => {
   return time.split(" ").at(-1);
 };
 
@@ -48,17 +54,5 @@ const countNextDays = () => {
   } else {
     return props.forecastData.length - 1;
   }
-};
-
-const currentDayData = () => {
-  const formatDate = props.localtime.split(" ").at(0);
-
-  const result = props.forecastData.find((item) => {
-    if (item.date === formatDate) {
-      return item;
-    }
-  });
-
-  return result;
 };
 </script>

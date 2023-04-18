@@ -2,10 +2,10 @@
   <div class="text-center opacity-80">{{ formatLocalTime() }}</div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import dayjs from "dayjs";
 
-const props = defineProps({ localtime: String });
+const props = defineProps<{ localtime: string }>();
 
 const formatLocalTime = () => {
   const splitCurrentTime = props.localtime.split(" ");

@@ -3,7 +3,10 @@
     class="flex w-full h-screen overflow-y-auto bg-no-repeat bg-cover text-white p-8 max-350:text-sm max-767:p-3"
     :style="`background-image: url('${handleChangeBackgroundImage()}')`"
   >
-    <div class="w-full max-w-3xl m-auto px-[30px] py-[40px] rounded-lg bg-[#1e293b9e] shadow-light-black max-767:px-5">
+    <div
+      class="w-full max-w-3xl m-auto px-[30px] py-[40px] rounded-lg bg-[#1e293b9e] shadow-light-black max-767:px-5"
+      v-if="weatherData"
+    >
       <Header />
       <SearchBar @onUpdateSearchValue="handleUpdateSearchValue" />
       <LocalTime :localtime="weatherData.location.localtime" />
@@ -25,21 +28,22 @@
   </div>
 </template>
 
-<script setup>
-import axios from "axios";
-import { ref, watch, watchEffect } from "vue";
+<script setup lang="ts">
+import { ref, watchEffect } from "vue";
 import { useRoute } from "vue-router";
+import axios from "axios";
 
-import Forecast from "./components/Forecast.vue";
-import Header from "./components/Header.vue";
-import SearchBar from "./components/SearchBar.vue";
-import TemperatureDetail from "./components/TemperatureDetail.vue";
-import LocalTime from "./components/LocalTime.vue";
-import { URL_KEY, URL_BASE_API, BACKGROUND_IMAGE_DATA, BACKGROUND_IMAGE_DEFAULT } from "./global/constants";
+import Forecast from "@/components/Forecast.vue";
+import Header from "@/components/Header.vue";
+import SearchBar from "@/components/SearchBar.vue";
+import TemperatureDetail from "@/components/TemperatureDetail.vue";
+import LocalTime from "@/components/LocalTime.vue";
+import { URL_KEY, URL_BASE_API, BACKGROUND_IMAGE_DATA, BACKGROUND_IMAGE_DEFAULT } from "@/global/constants";
+import type Weather from "@/interfaces/Weather";
 
 const route = useRoute();
 const searchValue = ref("");
-const weatherData = ref(null);
+const weatherData = ref<Weather>();
 
 const handleQueryLocation = () => {
   if (searchValue.value) {
@@ -69,6 +73,8 @@ watchEffect(() => {
 });
 
 const handleChangeBackgroundImage = () => {
+  if (!weatherData.value) return;
+
   const statusWeatherData = weatherData.value.current.condition.text.toLowerCase();
   const keys = Object.keys(BACKGROUND_IMAGE_DATA);
   const status = keys.find((key) => statusWeatherData.includes(key));
@@ -79,7 +85,7 @@ const handleChangeBackgroundImage = () => {
   }
 };
 
-const handleUpdateSearchValue = (value) => {
+const handleUpdateSearchValue = (value: string) => {
   searchValue.value = value;
 };
 </script>

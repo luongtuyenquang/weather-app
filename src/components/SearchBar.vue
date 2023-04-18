@@ -13,18 +13,20 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
-const emit = defineEmits(["onUpdateSearchValue"]);
+const emit = defineEmits<{ (e: "onUpdateSearchValue", value: string): void }>();
 
 const router = useRouter();
 const searchValue = ref("");
 
 const handleUpdateValue = () => {
+  const formatSearchValue = searchValue.value.toLowerCase().split(" ").join("");
+
   emit("onUpdateSearchValue", searchValue.value);
-  router.push(searchValue.value.toLowerCase());
+  router.push(formatSearchValue);
   if (searchValue.value === "") router.push("/");
 };
 </script>

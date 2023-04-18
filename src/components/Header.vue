@@ -8,13 +8,13 @@
   </header>
 </template>
 
-<script setup>
-import { NAV_DATA } from "../global/constants";
+<script setup lang="ts">
 import { useRoute, RouterLink } from "vue-router";
+import { NAV_DATA } from "@/global/constants";
 
 const route = useRoute();
 
-const isActive = (nav) => {
+const isActive = (nav: string) => {
   return route.params.location === nav;
 };
 </script>

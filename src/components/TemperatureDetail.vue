@@ -10,37 +10,28 @@
       </div>
     </div>
     <div class="flex justify-between mb-9 opacity-[0.85] max-767:flex-col max-767:gap-y-2 max-767:items-center">
-      <p>Bình minh: {{ currentDayData().astro.sunrise }}</p>
+      <p>Bình minh: {{ getCurrentDay(localtime, forecastData)?.astro.sunrise }}</p>
       <span class="opacity-70 max-767:hidden">|</span>
-      <p>Hoàng hôn: {{ currentDayData().astro.sunset }}</p>
+      <p>Hoàng hôn: {{ getCurrentDay(localtime, forecastData)?.astro.sunset }}</p>
       <span class="opacity-70 max-767:hidden">|</span>
-      <p>Trăng lên: {{ currentDayData().astro.moonrise }}</p>
+      <p>Trăng lên: {{ getCurrentDay(localtime, forecastData)?.astro.moonrise }}</p>
       <span class="opacity-70 max-767:hidden">|</span>
-      <p>Trăng tàn: {{ currentDayData().astro.moonset }}</p>
+      <p>Trăng tàn: {{ getCurrentDay(localtime, forecastData)?.astro.moonset }}</p>
     </div>
   </section>
 </template>
 
-<script setup>
-const props = defineProps({
-  icon: String,
-  temp: Number,
-  humidity: Number,
-  wind: Number,
-  feelsLike: Number,
-  forecastData: Array,
-  localtime: String,
-});
+<script setup lang="ts">
+import getCurrentDay from "@/utils/getCurrentDay";
+import type { ForecastDay } from "@/interfaces/Weather";
 
-const currentDayData = () => {
-  const formatDate = props.localtime.split(" ").at(0);
-
-  const result = props.forecastData.find((item) => {
-    if (item.date === formatDate) {
-      return item;
-    }
-  });
-
-  return result;
-};
+defineProps<{
+  icon: string;
+  temp: number;
+  humidity: number;
+  wind: number;
+  feelsLike: number;
+  forecastData: ForecastDay[];
+  localtime: string;
+}>();
 </script>
